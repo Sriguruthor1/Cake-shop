@@ -163,7 +163,7 @@ const cakes = [
 }
 ];
 
-const USD_TO_INR = 183; // USD to INR conversion rate
+const USD_TO_INR = 38; // USD to INR conversion rate
 
 
 // Cart functionality

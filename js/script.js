@@ -75,7 +75,7 @@ const cakes = [
     name: "Black Forest Classic",
     price: 44,
     category: "chocolate",
-    image: "img/Black forest Classic.jpg",  
+    image: "https://cdn.igp.com/f_auto,q_auto,t_pnopt12prodlp/products/p-classic-black-forest-cake-1-kg--203710-m.jpg",  
     description: "Chocolate sponge, cherries, and fresh cream.",
     rating: 4.7,
     reviews: 208

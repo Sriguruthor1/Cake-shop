@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vetri Delights Cake Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800 overflow-x-hidden">
+    <!-- Floating decorative elements -->
+    <div class="fixed top-10 left-10 opacity-10 pointer-events-none">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e4cee36-0afb-468a-acf6-845eed7178fa.png" alt="Decorative cake slice icon" class="decorative w-16 h-16">
+    </div>
+    <div class="fixed bottom-20 right-10 opacity-10 pointer-events-none">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b8e0181d-9466-42d1-bc50-89fb1f12d854.png" alt="Sprinkles scattered" class="decorative w-20 h-20">
+    </div>
+
+    <!-- Enhanced Navigation -->
+    <nav class="sticky top-0 beautiful-nav shadow-xl z-50 parallax rounded-b-2xl mx-2 mt-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center space-x-3">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dace88b2-30b3-4661-a18d-258418982188.png" alt="Vetri Delights Bakery Logo" class="h-12 w-auto nav-logo">
+                    <h1 class="text-2xl font-bold text-pink-700 font-dancing">Vetri Delights</h1>
+                </div>
+                <div class="hidden md:flex space-x-12">
+                    <a href="#home" class="nav-link text-gray-700">Home</a>
+                    <a href="#about" class="nav-link text-gray-700">About</a>
+                    <a href="#menu" class="nav-link text-gray-700">Menu</a>
+                    <a href="#contact" class="nav-link text-gray-700">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Search Bar -->
+                    <div class="relative hidden md:block">
+                        <input type="text" id="search-input" placeholder="Search cakes..." class="px-4 py-2 rounded-full border-2 border-pink-200 focus:border-pink-500 focus:outline-none">
+                        <svg class="w-5 h-5 absolute right-3 top-2.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <!-- Cart Icon -->
+                    
+
+                    <!-- Cart Button -->
+<button id="cart-btn" 
+  class="relative p-2 bg-pink-100 rounded-full hover:bg-pink-200 transition-all duration-300 shadow-md hover:shadow-lg">
+  
+  <!-- Shopping Cart Icon -->
+  <svg class="w-7 h-7 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+      d="M3 3h2l.4 2M7 13h11a1 1 0 0 0 .92-.62l3.24-7.24A1 1 0 0 0 21.3 4H6.1M7 13L5 6m2 7l-2.4 5.4a1 1 0 0 0 .9 1.6h13.5M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+  </svg>
+
+  <!-- Cart Count Badge -->
+  <span id="cart-count" 
+    class="absolute -top-1 -right-1 bg-pink-600 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center font-semibold shadow">
+    0
+  </span>
+</button>
+
+<!-- Mobile Menu Button -->
+<button id="menu-btn" 
+  class="md:hidden focus:outline-none bg-pink-100 p-2 rounded-full hover:bg-pink-200 transition-all duration-300 transform hover:scale-110 shadow-md hover:shadow-lg">
+  <svg class="w-7 h-7 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+      d="M4 6h16M4 12h16M4 18h16"/>
+  </svg>
+</button>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+            <div id="mobile-menu" class="mobile-menu hidden md:hidden absolute top-full left-0 right-0 bg-gradient-to-br from-white to-pink-50 shadow-lg rounded-b-xl">
+                <a href="#home" class="block px-6 py-4 nav-link text-gray-700 border-b border-pink-100">Home</a>
+                <a href="#about" class="block px-6 py-4 nav-link text-gray-700 border-b border-pink-100">About</a>
+                <a href="#menu" class="block px-6 py-4 nav-link text-gray-700 border-b border-pink-100">Menu</a>
+                <a href="#testimonials" class="block px-6 py-4 nav-link text-gray-700 border-b border-pink-100">Testimonials</a>
+                <a href="#contact" class="block px-6 py-4 nav-link text-gray-700">Contact</a>
+            </div>
+        </div>
+    
+</nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg flex items-center justify-center relative overflow-hidden parallax pt-16">
+        <div class="container mx-auto px-4 text-center z-10 bounce-in">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 text-pink-800 typewriter">Vetri Delights</h1>
+            <p class="text-xl md:text-2xl mb-6 fade-in-up">Where Every Cake is a Masterpiece</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+            
+                <button id="shopNowBtn" 
+  class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full text-lg transition-all duration-300 btn-hover shadow-lg hover:shadow-xl">
+  Shop Now
+</button>
+
+<button id="customOrderBtn" 
+  class="bg-white hover:bg-pink-100 text-pink-700 px-8 py-3 rounded-full text-lg transition-all duration-300 btn-hover shadow-lg hover:shadow-xl">
+  Custom Order
+</button>
+
+
+
+
+            </div>
+        </div>
+        <div class="absolute inset-0 flex items-end justify-center opacity-20">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ece7ee67-1538-4299-b5a9-3abe017b0a2b.png" alt="Multi-tiered wedding cake" class="w-full h-full object-cover float">
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white parallax">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-10 items-center slide-in-left">
+                <div class="cake-layout fade-in-up">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/77757d52-859d-46d5-b1f1-7e61997d29d4.png" alt="Cake shop interior" class="rounded-lg shadow-lg">
+                </div>
+                <div class="slide-in-right">
+                    <h2 class="text-4xl font-bold mb-6 text-pink-800 fade-in-up">Our Story</h2>
+                    <p class="text-lg mb-4 fade-in-up">Founded in 2010, Vetri Delights has been crafting unforgettable cakes for every occasion. From weddings to birthdays, our skilled artisans use the finest ingredients to create edible works of art.</p>
+                    <p class="text-lg mb-6 fade-in-up">We believe in sustainability, using local and organic ingredients whenever possible, ensuring every bite is as delicious as it is kind to the planet.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="text-center p-4 bg-pink-50 rounded-lg">
+                            <i class="fas fa-award text-3xl text-pink-600 mb-2"></i>
+                            <h3 class="font-bold">Award Winning</h3>
+                            <p class="text-sm">Best Bakery 2022</p>
+                        </div>
+                        <div class="text-center p-4 bg-pink-50 rounded-lg">
+                            <i class="fas fa-leaf text-3xl text-pink-600 mb-2"></i>
+                            <h3 class="font-bold">Eco-Friendly</h3>
+                            <p class="text-sm">Sustainable Practices</p>
+                        </div>
+                    </div>
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition-colors">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section with Filters -->
+    <section id="menu" class="py-20 bg-gray-100 parallax">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-pink-800 slide-in-right fade-in-up">Our Signature Cakes</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Indulge in our handcrafted cakes made with the finest ingredients and a whole lot of love.</p>
+
+            <!-- Filters and Sort -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <!-- Filters -->
+                    <div class="flex flex-wrap gap-2">
+                        <button data-filter="all" class="filter-btn px-4 py-2 rounded-full border-2 border-pink-300 bg-white active">All Categories</button>
+                        <button data-filter="chocolate" class="filter-btn px-4 py-2 rounded-full border-2 border-pink-300 bg-white">Chocolate</button>
+                        <button data-filter="vanilla" class="filter-btn px-4 py-2 rounded-full border-2 border-pink-300 bg-white">Vanilla</button>
+                        <button data-filter="fruit" class="filter-btn px-4 py-2 rounded-full border-2 border-pink-300 bg-white">Fruit</button>
+                        <button data-filter="specialty" class="filter-btn px-4 py-2 rounded-full border-2 border-pink-300 bg-white">Specialty</button>
+                    </div>
+
+                    <!-- Price Range -->
+                    <div class="flex items-center gap-4">
+                        <label for="price-min" class="text-sm font-medium">Price:</label>
+                        <input type="number" id="price-min" placeholder="Min" class="px-3 py-2 border border-gray-300 rounded-md w-20">
+                        <span>-</span>
+                        <input type="number" id="price-max" placeholder="Max" class="px-3 py-2 border border-gray-300 rounded-md w-20">
+                        <button id="apply-price" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition-colors">Filter</button>
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="flex items-center gap-2">
+                        <label for="sort-select" class="text-sm font-medium">Sort by:</label>
+                        <select id="sort-select" class="px-3 py-2 border border-gray-300 rounded-md">
+                            <option value="name">Name</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="popularity">Popularity</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cake Grid -->
+            <div id="cake-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cake items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white parallax">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-pink-800">What Our Customers Say</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-pink-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-pink-200 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-pink-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Srinathi IAS</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The wedding cake was absolutely stunning and tasted even better than it looked! Our guests are still talking about it."</p>
+                </div>
+                <div class="bg-pink-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-pink-200 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-pink-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Allu Arvind</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"I've ordered birthday cakes from Vetri Delights for the past three years, and they never disappoint. The chocolate delight is our family's favorite!"</p>
+                </div>
+                <div class="bg-pink-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-pink-200 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-pink-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Emma Watson</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The custom cake I ordered for my daughter's graduation was not only beautiful but also delicious. The attention to detail was incredible."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-pink-600 text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Vetrien Your Inbox</h2>
+            <p class="mb-6">Subscribe to our newsletter for exclusive deals, new flavors, and baking tips!</p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 rounded-full text-gray-800 focus:outline-none">
+                <button type="submit" class="bg-white text-pink-600 px-6 py-3 rounded-full font-semibold hover:bg-pink-100 transition-colors">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-pink-50 parallax">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-pink-800">Get in Touch</h2>
+            <p class="text-center text-gray-600 mb-12">Have a question or want to place a custom order? We'd love to hear from you!</p>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div>
+                    <form class="grid gap-6">
+                        <input type="text" placeholder="Name" class="p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500">
+                        <input type="email" placeholder="Email" class="p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500">
+                        <input type="tel" placeholder="Phone" class="p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500">
+                        <textarea placeholder="Message" class="p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 h-32"></textarea>
+                        <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg transition-colors btn-hover">Send Message</button>
+                    </form>
+                </div>
+                <div>
+                    <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                        <h3 class="text-xl font-bold mb-4 text-pink-800">Visit Our Bakery</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-pink-600 mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Address</h4>
+                                    <p class="text-gray-600">VTS & VIS, April's Complex, Shanthi Complex, Surandai.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-clock text-pink-600 mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Hours</h4>
+                                    <p class="text-gray-600">Monday-Friday: 8am-7pm</p>
+                                    <p class="text-gray-600">Saturday: 9am-8pm</p>
+                                    <p class="text-gray-600">Sunday: 10am-5pm</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-phone text-pink-600 mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Phone</h4>
+                                    <p class="text-gray-600">91 8015341010</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope text-pink-600 mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p class="text-gray-600">hello@Vetridelights.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beautiful Footer -->
+    <footer class="bg-gradient-to-r from-pink-800 via-pink-600 to-pink-700 text-white py-12 parallax relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="flex justify-center items-end h-full">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/40dcb622-205c-4d11-b9ee-f4a07babe449.png" alt="Pattern of cupcakes" class="object-cover w-full h-3/4 footer-decoration">
+            </div>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold font-dancing">Vetri Delights</h3>
+                    <p class="text-pink-100">Where every cake is a masterpiece, crafted with love and the finest ingredients.</p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold">Quick Links</h4>
+                    <nav class="space-y-2">
+                        <a href="#home" class="hover:text-pink-200 transition-colors">Home</a>
+                        <a href="#about" class="hover:text-pink-200 transition-colors">About</a>
+                        <a href="#menu" class="hover:text-pink-200 transition-colors">Menu</a>
+                        <a href="#testimonials" class="hover:text-pink-200 transition-colors">Testimonials</a>
+                        <a href="#contact" class="hover:text-pink-200 transition-colors">Contact</a>
+                    <a href="custom.html" class="ml-4 text-pink-600 hover:text-pink-700 font-semibold">Custom Design</a>
+</nav>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold">Contact Info</h4>
+                    <div class="space-y-2 text-pink-100">
+                        <p>📍 VTS & VIS, April's Complex, Shanthi Complex, Surandai.</p>
+                        <p>📞 (91) 8015341010</p>
+                        <p>✉️ hello@Vetridelights.com</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f text-blue-600"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-600 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-pink-600"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-blue-400"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors">
+                            <i class="fab fa-pinterest-p text-red-600"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-pink-500 pt-8 text-center">
+                <p class="text-pink-200">&copy; 2023 Vetri Delights. All rights reserved.</p>
+                <p class="text-pink-300 mt-2 font-dancing text-lg">Made with &hearts; in every bite</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl transform translate-x-full z-50 parallax transition-transform duration-300">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-pink-800">Your Cart</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="cart-items" class="flex-1 overflow-y-auto">
+                <div class="text-center py-10 text-gray-500" id="empty-cart-message">
+                    <i class="fas fa-shopping-cart text-4xl mb-4 opacity-30"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            
+
+            <div id="cart-total" class="border-t pt-4 hidden">
+                <div class="flex justify-between text-xl font-bold mb-4">
+                    <span>Total:</span>
+                    <span id="total-price">₹0.00</span>
+                </div>
+                <button id="checkout-btn" class="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg transition-colors font-semibold">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Overlay for cart and mobile menu -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50 hidden">
+        <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4 border-t-pink-600"></div>
+    </div>
+<script>
+  // Scroll down to cakes section when "Shop Now" is clicked
+  
+document.addEventListener("DOMContentLoaded", () => {
+  const shopBtn = document.getElementById("shopNowBtn");
+  const cakeGrid = document.getElementById("cake-grid");
+
+  if (shopBtn && cakeGrid) {
+    shopBtn.addEventListener("click", () => {
+      cakeGrid.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+});
+
+
+
+  // Open custom.html when "Custom Order" is clicked
+  document.getElementById("customOrderBtn").addEventListener("click", function() {
+    window.location.href = "custom.html";
+  });
+
+
+
+  
+</script>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

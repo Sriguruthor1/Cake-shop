@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Cake Order - Sweet Delights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .font-dancing { font-family: 'Dancing Script', cursive; }
+        .progress-bar {
+            height: 8px;
+            transition: width 0.5s ease;
+        }
+        .flavor-option {
+            transition: all 0.3s ease;
+        }
+        .flavor-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .flavor-option.selected {
+            border: 3px solid #ec4899;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+        .cake-preview {
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        .design-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .design-option:hover {
+            transform: scale(1.05);
+        }
+        .design-option.selected {
+            border: 3px solid #ec4899;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+        .summary-item {
+            transition: all 0.3s ease;
+        }
+        .summary-item:hover {
+            background-color: #fdf2f8;
+        }
+        .size-option, .shape-option, .tier-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .size-option:hover, .shape-option:hover, .tier-option:hover {
+            background-color: #fdf2f8;
+        }
+        .size-option.selected, .shape-option.selected, .tier-option.selected {
+            border: 3px solid #ec4899;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+        .filling-option, .frosting-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .filling-option:hover, .frosting-option:hover {
+            background-color: #fdf2f8;
+        }
+        .filling-option.selected, .frosting-option.selected {
+            border: 3px solid #ec4899;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-amber-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center space-x-3">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dace88b2-30b3-4661-a18d-258418982188.png" alt="Sweet Delights Logo" class="h-12 w-auto">
+                    <h1 class="text-2xl font-bold text-pink-700 font-dancing">Sweet Delights</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-pink-600 transition-colors">Home</a>
+                    <a href="index.html#menu" class="text-gray-700 hover:text-pink-600 transition-colors">Menu</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-pink-600 transition-colors">About</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-pink-600 transition-colors">Contact</a>
+                </div>
+               
+
+    </a>
+    <a href="index.html" class="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-full transition-colors">Back to Shop</a>
+</div>
+        </div>
+    </nav>
+
+    <!-- Custom Order Container -->
+    <div class="max-w-6xl mx-auto px-4 py-10">
+        <div class="text-center mb-12 animate-fadeIn">
+            <h1 class="text-4xl md:text-5xl font-bold text-pink-800 font-dancing">Create Your Custom Cake</h1>
+            <p class="text-xl text-gray-600 mt-4">Design the perfect cake for your special occasion</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-lg font-semibold text-pink-700">Your Progress</span>
+                <span class="text-pink-600 font-medium" id="progress-text">Step 1 of 6</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="progress-bar bg-pink-600 h-3 rounded-full" style="width: 16.6%"></div>
+            </div>
+        </div>
+
+        <!-- Form Steps -->
+        <form id="custom-cake-form" class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Step 1: Occasion & Details -->
+            <div class="step active" id="step-1">
+                <div class="p-8 border-b border-gray-100">
+                    <h2 class="text-2xl font-bold text-pink-800 mb-6">Occasion & Details</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">What's the occasion?</label>
+                            <select id="occasion" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
+                                <option value="">Select an occasion</option>
+                                <option value="Birthday">Birthday</option>
+                                <option value="Wedding">Wedding</option>
+                                <option value="Anniversary">Anniversary</option>
+                                <option value="Baby Shower">Baby Shower</option>
+                                <option value="Graduation">Graduation</option>
+                                <option value="Corporate Event">Corporate Event</option>
+                                <option value="Just Because">Just Because</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">When do you need it?</label>
+                            <input type="date" id="delivery-date" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Any special message on the cake?</label>
+                            <input type="text" id="cake-message" placeholder="e.g., Happy Birthday Sarah!" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-pink-50 flex justify-between">
+                    <div></div>
+                    <button type="button" class="next-step bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors">Next: Choose Size</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Size & Shape -->
+            <div class="step hidden" id="step-2">
+                <div class="p-8 border-b border-gray-100">
+                    <h2 class="text-2xl font-bold text-pink-800 mb-6">Size & Shape</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Cake Size</h3>
+                            <div class="space-y-4" id="size-options">
+                                <div class="size-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="small" data-price="35">
+                                    <input type="radio" name="size" id="size-small" class="h-5 w-5 text-pink-600 focus:ring-pink-500">
+                                    <label for="size-small" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Small (6-8 servings)</span>
+                                        <span class="text-sm text-gray-500">Perfect for small gatherings</span>
+                                    </label>
+                                    <span class="ml-auto font-semibold text-pink-700">+₹350</span>
+                                </div>
+                                <div class="size-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="medium" data-price="45">
+                                    <input type="radio" name="size" id="size-medium" class="h-5 w-5 text-pink-600 focus:ring-pink-500">
+                                    <label for="size-medium" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Medium (10-12 servings)</span>
+                                        <span class="text-sm text-gray-500">Great for birthdays</span>
+                                    </label>
+                                    <span class="ml-auto font-semibold text-pink-700">+₹450</span>
+                                </div>
+                                <div class="size-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer selected" data-value="large" data-price="60">
+                                    <input type="radio" name="size" id="size-large" class="h-5 w-5 text-pink-600 focus:ring-pink-500" checked>
+                                    <label for="size-large" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Large (15-20 servings)</span>
+                                        <span class="text-sm text-gray-500">Ideal for parties</span>
+                                    </label>
+                                    <span class="ml-auto font-semibold text-pink-700">+₹600</span>
+                                </div>
+                                <div class="size-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="xlarge" data-price="85">
+                                    <input type="radio" name="size" id="size-xlarge" class="h-5 w-5 text-pink-600 focus:ring-pink-500">
+                                    <label for="size-xlarge" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Extra Large (25-30 servings)</span>
+                                        <span class="text-sm text-gray-500">For big celebrations</span>
+                                    </label>
+                                    <span class="ml-auto font-semibold text-pink-700">+₹850</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Cake Shape</h3>
+                            <div class="grid grid-cols-2 gap-4" id="shape-options">
+                                <div class="shape-option flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer selected" data-value="round">
+                                    <div class="w-16 h-16 bg-pink-200 rounded-full mb-2 flex items-center justify-center">
+                                        <i class="fas fa-circle text-pink-600"></i>
+                                    </div>
+                                    <span class="font-medium">Round</span>
+                                </div>
+                                <div class="shape-option flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="square">
+                                    <div class="w-16 h-16 bg-pink-200 rounded-lg mb-2 flex items-center justify-center">
+                                        <i class="fas fa-square text-pink-600"></i>
+                                    </div>
+                                    <span class="font-medium">Square</span>
+                                </div>
+                                <div class="shape-option flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="sheet">
+                                    <div class="w-16 h-16 bg-pink-200 rounded-sm mb-2 flex items-center justify-center">
+                                        <i class="fas fa-rectangle-wide text-pink-600"></i>
+                                    </div>
+                                    <span class="font-medium">Sheet</span>
+                                </div>
+                                <div class="shape-option flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="heart">
+                                    <div class="w-16 h-16 bg-pink-200 rounded-lg mb-2 flex items-center justify-center" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);">
+                                        <i class="fas fa-play fa-rotate-180 text-pink-600"></i>
+                                    </div>
+                                    <span class="font-medium">Heart</span>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-800 mt-8 mb-4">Tiers</h3>
+                            <div class="flex space-x-4" id="tier-options">
+                                <div class="tier-option flex-1 text-center p-4 border border-gray-300 rounded-lg cursor-pointer selected" data-value="1" data-price="0">
+                                    <div class="w-12 h-12 bg-pink-200 rounded-full mb-2 mx-auto flex items-center justify-center">
+                                        <span class="font-bold">1</span>
+                                    </div>
+                                    <span class="font-medium">Single Tier</span>
+                                </div>
+                                <div class="tier-option flex-1 text-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="2" data-price="40">
+                                    <div class="w-12 h-12 bg-pink-200 rounded-full mb-2 mx-auto flex items-center justify-center relative">
+                                        <span class="font-bold absolute top-0">2</span>
+                                        <span class="font-bold absolute bottom-0">1</span>
+                                    </div>
+                                    <span class="font-medium">Two Tiers</span>
+                                    <span class="block text-sm text-pink-700">+₹400</span>
+                                </div>
+                                <div class="tier-option flex-1 text-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="3" data-price="80">
+                                    <div class="w-12 h-12 bg-pink-200 rounded-full mb-2 mx-auto flex items-center justify-center relative">
+                                        <span class="font-bold absolute top-0">3</span>
+                                        <span class="font-bold absolute">2</span>
+                                        <span class="font-bold absolute bottom-0">1</span>
+                                    </div>
+                                    <span class="font-medium">Three Tiers</span>
+                                    <span class="block text-sm text-pink-700">+₹800</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-pink-50 flex justify-between">
+                    <button type="button" class="prev-step text-pink-600 hover:text-pink-800 px-6 py-3 rounded-full font-semibold transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button type="button" class="next-step bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors">Next: Choose Flavors</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Flavors -->
+            <div class="step hidden" id="step-3">
+                <div class="p-8 border-b border-gray-100">
+                    <h2 class="text-2xl font-bold text-pink-800 mb-6">Choose Your Flavors</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Cake Flavor</h3>
+                            <div class="grid grid-cols-2 gap-4" id="flavor-options">
+                                <div class="flavor-option p-4 border border-gray-300 rounded-lg text-center cursor-pointer" data-value="vanilla" data-price="0">
+                                    <div class="w-16 h-16 bg-amber-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-cookie text-amber-700"></i>
+                                    </div>
+                                    <span class="font-medium">Vanilla</span>
+                                </div>
+                                <div class="flavor-option p-4 border border-gray-300 rounded-lg text-center cursor-pointer" data-value="chocolate" data-price="0">
+                                    <div class="w-16 h-16 rounded-full mx-auto mb-2 flex items-center justify-center" style="background-color: #8B4513;">
+                                        <i class="fas fa-cookie text-amber-100"></i>
+                                    </div>
+                                    <span class="font-medium">Chocolate</span>
+                                </div>
+                                <div class="flavor-option p-4 border border-gray-300 rounded-lg text-center cursor-pointer selected" data-value="red-velvet" data-price="5">
+                                    <div class="w-16 h-16 bg-red-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-cookie text-red-700"></i>
+                                    </div>
+                                    <span class="font-medium">Red Velvet</span>
+                                </div>
+                                <div class="flavor-option p-4 border border-gray-300 rounded-lg text-center cursor-pointer" data-value="lemon" data-price="3">
+                                    <div class="w-16 h-16 bg-yellow-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-cookie text-yellow-700"></i>
+                                    </div>
+                                    <span class="font-medium">Lemon</span>
+                                </div>
+                                <div class="flavor-option p-4 border border-gray-300 rounded-lg text-center cursor-pointer" data-value="carrot" data-price="4">
+                                    <div class="w-16 h-16 bg-orange-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-cookie text-orange-700"></i>
+                                    </div>
+                                    <span class="font-medium">Carrot</span>
+                                </div>
+                                <div class="flavor-option p-4 border border-gray-300 rounded-lg text-center cursor-pointer" data-value="strawberry" data-price="3">
+                                    <div class="w-16 h-16 bg-pink-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-cookie text-pink-700"></i>
+                                    </div>
+                                    <span class="font-medium">Strawberry</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Filling</h3>
+                            <div class="space-y-4" id="filling-options">
+                                <div class="filling-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer selected" data-value="vanilla-buttercream" data-price="0">
+                                    <input type="radio" name="filling" id="filling-vanilla" class="h-5 w-5 text-pink-600 focus:ring-pink-500" checked>
+                                    <label for="filling-vanilla" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Vanilla Buttercream</span>
+                                        <span class="text-sm text-gray-500">Classic and sweet</span>
+                                    </label>
+                                </div>
+                                <div class="filling-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="chocolate-ganache" data-price="5">
+                                    <input type="radio" name="filling" id="filling-chocolate" class="h-5 w-5 text-pink-600 focus:ring-pink-500">
+                                    <label for="filling-chocolate" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Chocolate Ganache</span>
+                                        <span class="text-sm text-gray-500">Rich and decadent</span>
+                                    </label>
+                                </div>
+                                <div class="filling-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="raspberry-jam" data-price="3">
+                                    <input type="radio" name="filling" id="filling-raspberry" class="h-5 w-5 text-pink-600 focus:ring-pink-500">
+                                    <label for="filling-raspberry" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Raspberry Jam</span>
+                                        <span class="text-sm text-gray-500">Tangy and fruity</span>
+                                    </label>
+                                </div>
+                                <div class="filling-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="lemon-curd" data-price="4">
+                                    <input type="radio" name="filling" id="filling-lemon" class="h-5 w-5 text-pink-600 focus:ring-pink-500">
+                                    <label for="filling-lemon" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Lemon Curd</span>
+                                        <span class="text-sm text-gray-500">Zesty and refreshing</span>
+                                    </label>
+                                </div>
+                                <div class="filling-option flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="cream-cheese" data-price="4">
+                                    <input type="radio" name="filling" id="filling-cream-cheese" class="h-5 w-5 text-pink-600 focus:ring-pink-500">
+                                    <label for="filling-cream-cheese" class="ml-3 flex flex-col">
+                                        <span class="font-medium">Cream Cheese</span>
+                                        <span class="text-sm text-gray-500">Tangy and creamy</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-800 mt-8 mb-4">Frosting Type</h3>
+                            <div class="grid grid-cols-2 gap-4" id="frosting-options">
+                                <div class="frosting-option flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer selected" data-value="buttercream" data-price="0">
+                                    <div class="w-12 h-12 bg-pink-100 rounded-full mb-2 flex items-center justify-center">
+                                        <i class="fas fa-ice-cream text-pink-600"></i>
+                                    </div>
+                                    <span class="font-medium text-sm">Buttercream</span>
+                                </div>
+                                <div class="frosting-option flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="fondant" data-price="15">
+                                    <div class="w-12 h-12 bg-pink-100 rounded-full mb-2 flex items-center justify-center">
+                                        <i class="fas fa-candy text-pink-600"></i>
+                                    </div>
+                                    <span class="font-medium text-sm">Fondant</span>
+                                    <span class="text-xs text-pink-700">+₹150</span>
+                                </div>
+                                <div class="frosting-option flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="whipped-cream" data-price="0">
+                                    <div class="w-12 h-12 bg-pink-100 rounded-full mb-2 flex items-center justify-center">
+                                        <i class="fas fa-whipped-cream text-pink-600"></i>
+                                    </div>
+                                    <span class="font-medium text-sm">Whipped Cream</span>
+                                </div>
+                                <div class="frosting-option flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer" data-value="ganache" data-price="10">
+                                    <div class="w-12 h-12 bg-pink-100 rounded-full mb-2 flex items-center justify-center">
+                                        <i class="fas fa-fill-drip text-pink-600"></i>
+                                    </div>
+                                    <span class="font-medium text-sm">Ganache</span>
+                                    <span class="text-xs text-pink-700">+₹100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-pink-50 flex justify-between">
+                    <button type="button" class="prev-step text-pink-600 hover:text-pink-800 px-6 py-3 rounded-full font-semibold transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button type="button" class="next-step bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors">Next: Design & Decoration</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Design -->
+            <div class="step hidden" id="step-4">
+                <div class="p-8 border-b border-gray-100">
+                    <h2 class="text-2xl font-bold text-pink-800 mb-6">Design & Decoration</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Color Scheme</h3>
+                            <div class="grid grid-cols-4 gap-3 mb-6" id="color-options">
+                                <div class="w-10 h-10 bg-pink-400 rounded-full cursor-pointer border-2 border-white shadow-md" data-color="#f472b6"></div>
+                                <div class="w-10 h-10 bg-blue-400 rounded-full cursor-pointer border-2 border-white shadow-md" data-color="#60a5fa"></div>
+                                <div class="w-10 h-10 bg-purple-400 rounded-full cursor-pointer border-2 border-white shadow-md" data-color="#a78bfa"></div>
+                                <div class="w-10 h-10 bg-yellow-400 rounded-full cursor-pointer border-2 border-white shadow-md" data-color="#fbbf24"></div>
+                                <div class="w-10 h-10 bg-green-400 rounded-full cursor-pointer border-2 border-white shadow-md" data-color="#34d399"></div>
+                                <div class="w-10 h-10 bg-red-400 rounded-full cursor-pointer border-2 border-white shadow-md" data-color="#f87171"></div>
+                                <div class="w-10 h-10 bg-white rounded-full cursor-pointer border-2 border-gray-300 shadow-md" data-color="#ffffff"></div>
+                                <div class="w-10 h-10 bg-black rounded-full cursor-pointer border-2 border-white shadow-md" data-color="#000000"></div>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Or enter custom color code:</label>
+                                <div class="flex">
+                                    <input type="text" id="custom-color" placeholder="#FF69B4" class="flex-1 p-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
+                                    <button type="button" id="apply-color" class="bg-pink-500 text-white px-4 rounded-r-lg">Apply</button>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Decoration Style</h3>
+                            <div class="grid grid-cols-2 gap-4" id="decoration-options">
+                                <div class="design-option p-4 border border-gray-300 rounded-lg text-center" data-value="fresh-flowers" data-price="25">
+                                    <div class="w-16 h-16 bg-pink-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-leaf text-green-600"></i>
+                                    </div>
+                                    <span class="font-medium text-sm">Fresh Flowers</span>
+                                    <span class="block text-xs text-pink-700">+₹250</span>
+                                </div>
+                                <div class="design-option p-4 border border-gray-300 rounded-lg text-center selected" data-value="buttercream" data-price="0">
+                                    <div class="w-16 h-16 bg-pink-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-star text-yellow-500"></i>
+                                    </div>
+                                    <span class="font-medium text-sm">Buttercream</span>
+                                </div>
+                                <div class="design-option p-4 border border-gray-300 rounded-lg text-center" data-value="fondant-figures" data-price="35">
+                                    <div class="w-16 h-16 bg-pink-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-crown text-yellow-600"></i>
+                                    </div>
+                                    <span class="font-medium text-sm">Fondant Figures</span>
+                                    <span class="block text-xs text-pink-700">+₹350</span>
+                                </div>
+                                <div class="design-option p-4 border border-gray-300 rounded-lg text-center" data-value="edible-image" data-price="20">
+                                    <div class="w-16 h-16 bg-pink-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <i class="fas fa-image text-purple-600"></i>
+                                    </div>
+                                    <span class="font-medium text-sm">Edible Image</span>
+                                    <span class="block text-xs text-pink-700">+₹200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Cake Preview</h3>
+                            <div class="cake-preview bg-white border border-gray-200 rounded-xl p-6 flex items-center justify-center h-80">
+                                <div class="relative">
+                                    <div id="cake-base" class="w-40 h-40 bg-pink-300 rounded-full mx-auto shadow-lg"></div>
+                                    <div class="absolute top-0 left-0 right-0 text-center mt-5">
+                                        <span class="font-dancing text-white text-lg" id="preview-message">Happy Birthday!</span>
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 right-0 flex justify-center mb-2">
+                                        <div class="w-6 h-6 bg-yellow-400 rounded-full mx-1"></div>
+                                        <div class="w-6 h-6 bg-pink-400 rounded-full mx-1"></div>
+                                        <div class="w-6 h-6 bg-blue-400 rounded-full mx-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Upload inspiration photos (optional):</label>
+                                <div class="flex items-center justify-center w-full">
+                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl mb-2"></i>
+                                            <p class="mb-2 text-sm text-gray-500">Click to upload or drag and drop</p>
+                                            <p class="text-xs text-gray-500">PNG, JPG (MAX. 5MB each)</p>
+                                        </div>
+                                        <input type="file" id="inspiration-photos" class="hidden" multiple>
+                                    </label>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-pink-50 flex justify-between">
+                    <button type="button" class="prev-step text-pink-600 hover:text-pink-800 px-6 py-3 rounded-full font-semibold transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button type="button" class="next-step bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors">Next: Contact Info</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Contact Information -->
+            <div class="step hidden" id="step-5">
+                <div class="p-8 border-b border-gray-100">
+                    <h2 class="text-2xl font-bold text-pink-800 mb-6">Contact Information</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="customer-name" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" id="customer-phone" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="(123) 456-7890">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" id="customer-email" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="john.doe@example.com">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Delivery Address (if different from pickup)</label>
+                            <textarea id="delivery-address" rows="3" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="123 Main St, City, State, ZIP"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Special Instructions</label>
+                            <textarea id="special-instructions" rows="3" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="Any additional notes for our bakers..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-pink-50 flex justify-between">
+                    <button type="button" class="prev-step text-pink-600 hover:text-pink-800 px-6 py-3 rounded-full font-semibold transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button type="button" class="next-step bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors">Next: Review Order</button>
+                </div>
+            </div>
+
+            <!-- Step 6: Review & Submit -->
+            <div class="step hidden" id="step-6">
+                <div class="p-8 border-b border-gray-100">
+                    <h2 class="text-2xl font-bold text-pink-800 mb-6">Review Your Order</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Order Summary</h3>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <div class="space-y-4" id="order-summary">
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Cake Size:</span>
+                                        <span class="font-medium" id="summary-size">Large (15-20 servings)</span>
+                                    </div>
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Shape & Tiers:</span>
+                                        <span class="font-medium" id="summary-shape">Round, 1 tier</span>
+                                    </div>
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Flavor:</span>
+                                        <span class="font-medium" id="summary-flavor">Red Velvet</span>
+                                    </div>
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Filling:</span>
+                                        <span class="font-medium" id="summary-filling">Vanilla Buttercream</span>
+                                    </div>
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Frosting:</span>
+                                        <span class="font-medium" id="summary-frosting">Buttercream</span>
+                                    </div>
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Decoration:</span>
+                                        <span class="font-medium" id="summary-decoration">Buttercream design</span>
+                                    </div>
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Occasion:</span>
+                                        <span class="font-medium" id="summary-occasion">Birthday</span>
+                                    </div>
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Message:</span>
+                                        <span class="font-medium" id="summary-message">Happy Birthday!</span>
+                                    </div>
+                                    <div class="summary-item flex justify-between py-2 border-b border-gray-200">
+                                        <span class="text-gray-600">Delivery Date:</span>
+                                        <span class="font-medium" id="summary-date">Sep 15, 2023</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-gray-300">
+                                    <div class="flex justify-between text-lg font-semibold">
+                                        <span>Total Price:</span>
+                                        <span id="total-price">₹600.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Contact Details</h3>
+                            <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                                <div class="space-y-3">
+                                    <p><span class="font-medium">Name:</span> <span id="summary-name">John Doe</span></p>
+                                    <p><span class="font-medium">Email:</span> <span id="summary-email">john.doe@example.com</span></p>
+                                    <p><span class="font-medium">Phone:</span> <span id="summary-phone">(123) 456-7890</span></p>
+                                    <p><span class="font-medium">Delivery Address:</span> <span id="summary-address">123 Main St, City, State, ZIP</span></p>
+                                    <p><span class="font-medium">Special Instructions:</span> <span id="summary-instructions">None</span></p>
+                                </div>
+                            </div>
+                            <div class="bg-pink-50 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Payment Method</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <input id="credit-card" name="payment-method" type="radio" class="h-4 w-4 text-pink-600 focus:ring-pink-500" checked>
+                                        <label for="credit-card" class="ml-3 block text-sm font-medium text-gray-700">Credit Card</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="paypal" name="payment-method" type="radio" class="h-4 w-4 text-pink-600 focus:ring-pink-500">
+                                        <label for="paypal" class="ml-3 block text-sm font-medium text-gray-700">PayPal</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="cash-pickup" name="payment-method" type="radio" class="h-4 w-4 text-pink-600 focus:ring-pink-500">
+                                        <label for="cash-pickup" class="ml-3 block text-sm font-medium text-gray-700">Pay with Cash at Pickup</label>
+                                    </div>
+                                </div>
+                                <div id="credit-card-form" class="mt-6 space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
+                                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Expiration Date</label>
+                                            <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="MM/YY">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+                                            <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="123">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-pink-50 flex justify-between">
+                    <button type="button" class="prev-step text-pink-600 hover:text-pink-800 px-6 py-3 rounded-full font-semibold transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors">
+                        <i class="fas fa-check-circle mr-2"></i> Place Order
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form navigation
+            const steps = document.querySelectorAll('.step');
+            const nextButtons = document.querySelectorAll('.next-step');
+            const prevButtons = document.querySelectorAll('.prev-step');
+            const progressBar = document.querySelector('.progress-bar');
+            const progressText = document.getElementById('progress-text');
+            let currentStep = 1;
+            const totalSteps = steps.length;
+
+            // Update progress bar
+            function updateProgress() {
+                const progressPercentage = (currentStep / totalSteps) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                progressText.textContent = `Step ${currentStep} of ${totalSteps}`;
+            }
+
+            // Go to next step
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (validateStep(currentStep)) {
+                        document.getElementById(`step-${currentStep}`).classList.remove('active');
+                        document.getElementById(`step-${currentStep}`).classList.add('hidden');
+                        currentStep++;
+                        document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+                        document.getElementById(`step-${currentStep}`).classList.add('active');
+                        updateProgress();
+                        updateSummary();
+                    }
+                });
+            });
+
+            // Go to previous step
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    document.getElementById(`step-${currentStep}`).classList.remove('active');
+                    document.getElementById(`step-${currentStep}`).classList.add('hidden');
+                    currentStep--;
+                    document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+                    document.getElementById(`step-${currentStep}`).classList.add('active');
+                    updateProgress();
+                });
+            });
+
+            // Validate current step
+            function validateStep(step) {
+                // Add validation logic for each step if needed
+                return true;
+            }
+
+            // Option selection
+            const optionSelectors = document.querySelectorAll('.size-option, .shape-option, .tier-option, .flavor-option, .filling-option, .frosting-option, .design-option');
+            
+            optionSelectors.forEach(option => {
+                option.addEventListener('click', function() {
+                    // For radio button options, let the radio handle selection
+                    if (this.querySelector('input[type="radio"]')) {
+                        this.querySelector('input[type="radio"]').checked = true;
+                    }
+                    
+                    // Remove selected class from siblings
+                    const siblings = this.parentElement.children;
+                    for (let sibling of siblings) {
+                        sibling.classList.remove('selected');
+                    }
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Update preview if needed
+                    updatePreview();
+                });
+            });
+
+            // Color selection
+            const colorOptions = document.querySelectorAll('#color-options > div');
+            colorOptions.forEach(color => {
+                color.addEventListener('click', function() {
+                    const selectedColor = this.getAttribute('data-color');
+                    document.getElementById('cake-base').style.backgroundColor = selectedColor;
+                });
+            });
+
+            // Apply custom color
+            document.getElementById('apply-color').addEventListener('click', function() {
+                const customColor = document.getElementById('custom-color').value;
+                if (customColor) {
+                    document.getElementById('cake-base').style.backgroundColor = customColor;
+                }
+            });
+
+            // Update cake message preview
+            document.getElementById('cake-message').addEventListener('input', function() {
+                document.getElementById('preview-message').textContent = this.value || 'Your Message';
+            });
+
+            // Update order summary
+            function updateSummary() {
+                // Update all summary fields based on selected options
+                document.getElementById('summary-size').textContent = document.querySelector('.size-option.selected') ? 
+                    document.querySelector('.size-option.selected label span:first-child').textContent : 'Not selected';
+                
+                document.getElementById('summary-shape').textContent = document.querySelector('.shape-option.selected') ? 
+                    document.querySelector('.shape-option.selected span').textContent + ', ' + 
+                    document.querySelector('.tier-option.selected span').textContent + ' tier' : 'Not selected';
+                
+                document.getElementById('summary-flavor').textContent = document.querySelector('.flavor-option.selected') ? 
+                    document.querySelector('.flavor-option.selected span').textContent : 'Not selected';
+                
+                document.getElementById('summary-filling').textContent = document.querySelector('.filling-option.selected') ? 
+                    document.querySelector('.filling-option.selected label span:first-child').textContent : 'Not selected';
+                
+                document.getElementById('summary-frosting').textContent = document.querySelector('.frosting-option.selected') ? 
+                    document.querySelector('.frosting-option.selected span').textContent : 'Not selected';
+                
+                document.getElementById('summary-decoration').textContent = document.querySelector('.design-option.selected') ? 
+                    document.querySelector('.design-option.selected span').textContent : 'Not selected';
+                
+                document.getElementById('summary-occasion').textContent = document.getElementById('occasion').value || 'Not specified';
+                document.getElementById('summary-message').textContent = document.getElementById('cake-message').value || 'None';
+                
+                const deliveryDate = document.getElementById('delivery-date').value;
+                if (deliveryDate) {
+                    const dateObj = new Date(deliveryDate);
+                    document.getElementById('summary-date').textContent = dateObj.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                } else {
+                    document.getElementById('summary-date').textContent = 'Not selected';
+                }
+                
+                // Update contact details
+                document.getElementById('summary-name').textContent = document.getElementById('customer-name').value || 'Not provided';
+                document.getElementById('summary-email').textContent = document.getElementById('customer-email').value || 'Not provided';
+                document.getElementById('summary-phone').textContent = document.getElementById('customer-phone').value || 'Not provided';
+                document.getElementById('summary-address').textContent = document.getElementById('delivery-address').value || 'Store pickup';
+                document.getElementById('summary-instructions').textContent = document.getElementById('special-instructions').value || 'None';
+                
+                // Calculate and update total price
+                calculateTotal();
+            }
+
+            // Calculate total price
+            function calculateTotal() {
+                let total = 0;
+                
+                // Add size price
+                const sizeOption = document.querySelector('.size-option.selected');
+                if (sizeOption) {
+                    total += parseFloat(sizeOption.getAttribute('data-price')) || 0;
+                }
+                
+                // Add tier price
+                const tierOption = document.querySelector('.tier-option.selected');
+                if (tierOption) {
+                    total += parseFloat(tierOption.getAttribute('data-price')) || 0;
+                }
+                
+                // Add flavor price
+                const flavorOption = document.querySelector('.flavor-option.selected');
+                if (flavorOption) {
+                    total += parseFloat(flavorOption.getAttribute('data-price')) || 0;
+                }
+                
+                // Add filling price
+                const fillingOption = document.querySelector('.filling-option.selected');
+                if (fillingOption) {
+                    total += parseFloat(fillingOption.getAttribute('data-price')) || 0;
+                }
+                
+                // Add frosting price
+                const frostingOption = document.querySelector('.frosting-option.selected');
+                if (frostingOption) {
+                    total += parseFloat(frostingOption.getAttribute('data-price')) || 0;
+                }
+                
+                // Add decoration price
+                const designOption = document.querySelector('.design-option.selected');
+                if (designOption) {
+                    total += parseFloat(designOption.getAttribute('data-price')) || 0;
+                }
+                
+               document.getElementById('total-price').textContent = `₹${total.toFixed(2)}`;
+
+            }
+
+
+            // Form submission
+document.getElementById('custom-cake-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Calculate total price
+    const total = calculateTotal();
+    
+    // Create custom cake object
+    const customCake = {
+        id: Date.now(), // Unique ID based on timestamp
+        name: 'Custom Cake',
+        price: total,
+        image: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e4cee36-0afb-468a-acf6-845eed7178fa.png', // Default cake image
+        quantity: 1,
+        customizations: getCustomizationDetails()
+    };
+    
+    
+    
+    
+    window.location.href = 'index.html';
+});
+
+// Helper function to get customization details
+function getCustomizationDetails() {
+    const size = document.querySelector('.size-option.selected') ? 
+        document.querySelector('.size-option.selected label span:first-child').textContent : 'Not selected';
+    
+    const flavor = document.querySelector('.flavor-option.selected') ? 
+        document.querySelector('.flavor-option.selected span').textContent : 'Not selected';
+    
+    const occasion = document.getElementById('occasion').value || 'Not specified';
+    
+    return `Size: ${size}, Flavor: ${flavor}, Occasion: ${occasion}`;
+}
+
+            // Update cake preview
+            function updatePreview() {
+                // This function would update the visual cake preview based on selections
+                // For now, we'll just update the color if a color is selected
+            }
+
+            // Form submission
+            document.getElementById('custom-cake-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Your custom cake order has been placed successfully! We will contact you to confirm details.');
+                // In a real application, you would send the form data to a server here
+            });
+
+            // Initialize the form
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

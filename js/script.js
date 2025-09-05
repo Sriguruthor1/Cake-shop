@@ -75,7 +75,7 @@ const cakes = [
     name: "Black Forest Classic",
     price: 44,
     category: "chocolate",
-    image: "img/black forest Classic.png",  
+    image: "img/Black forest Classic.jpg",  
     description: "Chocolate sponge, cherries, and fresh cream.",
     rating: 4.7,
     reviews: 208
